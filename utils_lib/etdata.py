@@ -143,7 +143,7 @@ class ETData():
         ('t', np.float64),
         ('x', np.float32),
         ('y', np.float32),
-        ('status', np.bool),
+        ('status', bool),
         ('evt', np.uint8)
     ])
     evt_color_map = dict({
@@ -185,7 +185,7 @@ class ETData():
 
             if kwargs['source']=='array':
                 if not fpath.dtype == ETData.dtype:
-                    print "Error. Data types do not match"
+                    print("Error. Data types do not match")
                     return False
                 self.data = fpath
 

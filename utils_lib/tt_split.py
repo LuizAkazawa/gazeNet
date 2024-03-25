@@ -15,7 +15,7 @@ import numpy as np
 #import matplotlib.pyplot as plt
 #plt.ion()
 
-sys.path.append('..')
+sys.path.append('')
 
 #import seaborn as sns
 #sns.set_style("ticks")
@@ -130,7 +130,7 @@ if not os.path.exists(ddir):
     mkpath(ddir)
 
     #try to convert from mat
-    fdir_mat = 'EyeMovementDetectorEvaluation/annotated_data/images'
+    fdir_mat = 'EyeMovementDetectorEvaluation/annotated_data/data-article/img'
     FILES_MAT = glob.glob('%s/%s/*.mat'% (args.root, fdir_mat))
 
     for fpath in tqdm(FILES_MAT):
@@ -206,8 +206,11 @@ for df, part in zip([X_unpaired, X_paired, X_paired],
                     [['unpaired'], ['paired', 'RA'], ['paired', 'MN']]):
     if len(part)==1:
         part = part[0]
+        #part -> unpaired
         data[part] = []
+        #data -> OrderedDict([('unpaired', [])])
         for n, d in df.iterrows():
+            print(n, "   ", d)
             _data = np.load(d['fpath'])
             data_lens.append(len(_data))
             mask = np.in1d(_data['evt'], args.events)
